@@ -2,14 +2,15 @@
 
 require_once __DIR__ . "/migraciones.php";
 
-$host = getenv("APP_DB_HOST") ?: "localhost";
-$dbname = getenv("APP_DB_NAME") ?: "sistema_tesis";
-$user = getenv("APP_DB_USER") ?: "root";
-$password = getenv("APP_DB_PASSWORD") ?: "";
+$host = getenv("APP_DB_HOST") ?: (getenv("MYSQLHOST") ?: "localhost");
+$port = getenv("APP_DB_PORT") ?: (getenv("MYSQLPORT") ?: "3306");
+$dbname = getenv("APP_DB_NAME") ?: (getenv("MYSQLDATABASE") ?: "sistema_tesis");
+$user = getenv("APP_DB_USER") ?: (getenv("MYSQLUSER") ?: "root");
+$password = getenv("APP_DB_PASSWORD") ?: (getenv("MYSQLPASSWORD") ?: "");
 
 try {
     $conexion = new PDO(
-        "mysql:host={$host};dbname={$dbname};charset=utf8mb4",
+        "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
         $user,
         $password,
         [

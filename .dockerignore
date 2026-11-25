@@ -1,0 +1,15 @@
+.git
+.env
+.env.*
+!.env.example
+**/*.sql
+config/groq_key.local.php
+storage/*
+!storage/documentos/
+!storage/documentos/.htaccess
+!storage/legal/
+!storage/legal/.htaccess
+frontend/node_modules/
+frontend/dist/
+empresa/prospectos.php.tmp
+public/app/

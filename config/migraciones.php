@@ -45,6 +45,8 @@ function ejecutarMigraciones(PDO $conexion): void
             ":usuario" => $usuarioAdministrador,
             ":password" => password_hash($passwordAdministrador, PASSWORD_DEFAULT),
         ]);
+    } elseif (isset($usuarioAdministrador, $passwordAdministrador)) {
+        error_log("Configure APP_ADMIN_USERNAME and APP_ADMIN_PASSWORD to create the initial administrator.");
     }
 
     $version = "001_esquema_empresarial";

@@ -17,6 +17,8 @@ GitHub guarda el código, pero GitHub Pages no ejecuta esta aplicación PHP ni s
 
 No subas respaldos SQL, archivos de `storage/`, claves ni datos personales de clientes. Los respaldos locales de la base están excluidos por `.gitignore`; prepara la base nueva en el hosting y no importes datos reales.
 
+El proyecto incluye un `Dockerfile` para Railway. Crea un servicio desde este repositorio, añade un servicio MySQL y configura `APP_ADMIN_USERNAME` y `APP_ADMIN_PASSWORD` antes del primer arranque. Railway expone las variables `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` y `MYSQLPASSWORD`, que la aplicación reconoce. Añade también un volumen persistente montado en `/var/www/html/storage` para conservar documentos subidos; el servidor bloquea el acceso web directo a esa carpeta.
+
 Al editar PHP, CSS o JavaScript servido directamente, guarda el archivo y recarga la página. Los cambios de React requieren `npm run build` en `frontend/`. En el sitio público, los cambios llegan después de subirlos a GitHub y de que el hosting complete su despliegue; guardar el archivo local no publica automáticamente.
 
 ## Pagos y coordinación académica
