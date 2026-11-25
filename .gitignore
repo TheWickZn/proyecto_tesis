@@ -5,6 +5,7 @@
 /sistema_tesis (1).sql
 /sistema_tesis_academico.sql
 /config/groq_key.local.php
+/config/hosting.local.php
 
 /storage/*
 !/storage/documentos/

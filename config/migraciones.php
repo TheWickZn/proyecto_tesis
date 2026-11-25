@@ -28,8 +28,9 @@ function ejecutarMigraciones(PDO $conexion): void
     );
 
     if ((int) $conexion->query("SELECT COUNT(*) FROM usuarios")->fetchColumn() === 0) {
-        $usuarioAdministrador = trim((string) getenv("APP_ADMIN_USERNAME"));
-        $passwordAdministrador = (string) getenv("APP_ADMIN_PASSWORD");
+        $configuracionHosting = $GLOBALS["configuracionHosting"] ?? [];
+        $usuarioAdministrador = trim((string) (getenv("APP_ADMIN_USERNAME") ?: ($configuracionHosting["APP_ADMIN_USERNAME"] ?? "")));
+        $passwordAdministrador = (string) (getenv("APP_ADMIN_PASSWORD") ?: ($configuracionHosting["APP_ADMIN_PASSWORD"] ?? ""));
     }
 
     if (

@@ -4,6 +4,7 @@
 !.env.example
 **/*.sql
 config/groq_key.local.php
+config/hosting.local.php
 storage/*
 !storage/documentos/
 !storage/documentos/.htaccess

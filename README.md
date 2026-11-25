@@ -13,13 +13,13 @@ El uso normal no requiere otro servidor web ni dejar Vite ejecutándose. CRM, Pi
 
 ## Despliegue público
 
-GitHub guarda el código, pero GitHub Pages no ejecuta esta aplicación PHP ni su base MySQL. Para publicarla se necesita un hosting que soporte PHP y MySQL; configura allí las variables de entorno de `.env.example` y apunta `APP_DB_*` a una base de datos vacía. Las migraciones preparan las tablas automáticamente y solo crean la cuenta administradora inicial si `APP_ADMIN_USERNAME` y `APP_ADMIN_PASSWORD` están configuradas.
+GitHub guarda el código, pero GitHub Pages no ejecuta esta aplicación PHP ni su base MySQL. Para una demo gratuita, InfinityFree anuncia soporte para PHP, MySQL y SSL. Crea allí una base vacía, copia `config/hosting.local.php.example` como `config/hosting.local.php` en el servidor y completa los valores que proporciona el panel. Las migraciones crean las tablas y la cuenta inicial si configuras `APP_ADMIN_USERNAME` y `APP_ADMIN_PASSWORD`.
 
-No subas respaldos SQL, archivos de `storage/`, claves ni datos personales de clientes. Los respaldos locales de la base están excluidos por `.gitignore`; prepara la base nueva en el hosting y no importes datos reales.
+Sube los archivos por FTP o el gestor del hosting; un `push` a GitHub no actualiza InfinityFree automáticamente. Tras editar, compila React con `npm run build` en `frontend/` si corresponde, vuelve a subir los archivos modificados y recarga el sitio.
 
-El proyecto incluye un `Dockerfile` para Railway. Crea un servicio desde este repositorio, añade un servicio MySQL y configura `APP_ADMIN_USERNAME` y `APP_ADMIN_PASSWORD` antes del primer arranque. Railway expone las variables `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` y `MYSQLPASSWORD`, que la aplicación reconoce. Añade también un volumen persistente montado en `/var/www/html/storage` para conservar documentos subidos; el servidor bloquea el acceso web directo a esa carpeta.
+No subas ni importes respaldos SQL, claves, archivos privados ni datos personales reales. Los respaldos locales están excluidos por `.gitignore`. Usa solo datos ficticios en esta demo. Después del primer arranque, elimina `APP_ADMIN_USERNAME` y `APP_ADMIN_PASSWORD` del archivo local del hosting; la contraseña se almacena como hash en MySQL. Protege igualmente las credenciales de la base y no las compartas públicamente.
 
-Al editar PHP, CSS o JavaScript servido directamente, guarda el archivo y recarga la página. Los cambios de React requieren `npm run build` en `frontend/`. En el sitio público, los cambios llegan después de subirlos a GitHub y de que el hosting complete su despliegue; guardar el archivo local no publica automáticamente.
+El proyecto también conserva un `Dockerfile` para proveedores como Railway que ejecutan contenedores y variables de entorno. Para documentos subidos, configura almacenamiento persistente en esos proveedores; el acceso web directo a `storage/` está bloqueado.
 
 ## Pagos y coordinación académica
 

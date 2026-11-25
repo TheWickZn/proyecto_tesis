@@ -1,0 +1,11 @@
+<?php
+
+return [
+    "APP_DB_HOST" => "sqlXXX.infinityfree.com",
+    "APP_DB_PORT" => "3306",
+    "APP_DB_NAME" => "if0_12345678_sistema",
+    "APP_DB_USER" => "if0_12345678",
+    "APP_DB_PASSWORD" => "REEMPLAZAR_CON_LA_CLAVE_DE_MYSQL",
+    "APP_ADMIN_USERNAME" => "admin",
+    "APP_ADMIN_PASSWORD" => "REEMPLAZAR_CON_UNA_CLAVE_SEGURA",
+];

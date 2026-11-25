@@ -1,12 +1,22 @@
 <?php
 
+$configuracionHosting = [];
+$archivoConfiguracionHosting = __DIR__ . "/hosting.local.php";
+if (is_file($archivoConfiguracionHosting)) {
+    $configuracionHosting = require $archivoConfiguracionHosting;
+    if (!is_array($configuracionHosting)) {
+        throw new UnexpectedValueException("La configuración local del hosting debe retornar un arreglo.");
+    }
+}
+$GLOBALS["configuracionHosting"] = $configuracionHosting;
+
 require_once __DIR__ . "/migraciones.php";
 
-$host = getenv("APP_DB_HOST") ?: (getenv("MYSQLHOST") ?: "localhost");
-$port = getenv("APP_DB_PORT") ?: (getenv("MYSQLPORT") ?: "3306");
-$dbname = getenv("APP_DB_NAME") ?: (getenv("MYSQLDATABASE") ?: "sistema_tesis");
-$user = getenv("APP_DB_USER") ?: (getenv("MYSQLUSER") ?: "root");
-$password = getenv("APP_DB_PASSWORD") ?: (getenv("MYSQLPASSWORD") ?: "");
+$host = getenv("APP_DB_HOST") ?: ($configuracionHosting["APP_DB_HOST"] ?? (getenv("MYSQLHOST") ?: "localhost"));
+$port = getenv("APP_DB_PORT") ?: ($configuracionHosting["APP_DB_PORT"] ?? (getenv("MYSQLPORT") ?: "3306"));
+$dbname = getenv("APP_DB_NAME") ?: ($configuracionHosting["APP_DB_NAME"] ?? (getenv("MYSQLDATABASE") ?: "sistema_tesis"));
+$user = getenv("APP_DB_USER") ?: ($configuracionHosting["APP_DB_USER"] ?? (getenv("MYSQLUSER") ?: "root"));
+$password = getenv("APP_DB_PASSWORD") ?: ($configuracionHosting["APP_DB_PASSWORD"] ?? (getenv("MYSQLPASSWORD") ?: ""));
 
 try {
     $conexion = new PDO(
